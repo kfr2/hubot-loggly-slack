@@ -13,8 +13,7 @@
 # Notes:
 #   To use:
 #     Setup http://hostname/hubot/loggly-slack/%23ROOMNAME as
-#     your Alert Endpoint in loggly.com. Use GET as the method.
-#     The POST method will post as text/plain and not be parsed properly.
+#     your Alert Endpoint in loggly.com. Use POST as the method.
 #
 
 bodyParser = require 'body-parser'
@@ -39,6 +38,7 @@ module.exports = (robot) ->
     #
     # {
     #   "alert_name": "Name of Alert",
+    #   "alert_description": "Description of Alert",
     #   "edit_alert_link": "https://company.loggly.com/alerts/edit/99999",
     #   "source_group": "Source Group",
     #   "start_time": "Aug 29 01:35:52",
@@ -54,7 +54,7 @@ module.exports = (robot) ->
 
     fields = [
         title: data.alert_name
-        value: data.source_group + ': ' + data.query
+        value: data.alert_description,
         short: true
       ,
         title: 'Hits'
